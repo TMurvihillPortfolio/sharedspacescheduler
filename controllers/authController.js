@@ -88,45 +88,48 @@ exports.logout = (req, res, next) => {
     res.status(200).json({ status: 'success' });
 };
 exports.protect = catchAsync(async (req, res, next) => {
-    //initialize variables
-    let token;
-    //get token from header
-    if (
-        req.headers.authorization &&
-        req.headers.authorization.startsWith('Bearer')
-    ) {
-        token = req.headers.authorization.split(' ')[1];
-    } else if (req.cookies.JWT3) {
-        token = req.cookies.JWT3;
-    }
-    //check if token exists
-    if (!token) {
-        return next(
-            new AppError(
-                'You are not logged in! Please log in to get access.',
-                401
-            )
-        );
-    }
-    //verify token
-    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    //make sure user still exists
-    const existingUser = await User.findById(decoded.id);
-    if (!existingUser) {
-        const newError = new AppError(
-            'User no longer exists for this authorization.'
-        );
-        newError.isOperational = true;
-        return next(newError);
-    }
-    //make sure user did not change password since JWT issued
-    if (existingUser.changedPasswordAfter(decoded.iat)) {
-        return next(
-            new AppError('Password has been changed. Please log in again')
-        );
-    }
-    //if process get here, then all tests passed and access to next middleware is granted
-    req.user = existingUser;
+    // //initialize variables
+    // let token;
+    // //get token from header
+    // if (
+    //     req.headers.authorization &&
+    //     req.headers.authorization.startsWith('Bearer')
+    // ) {
+    //     token = req.headers.authorization.split(' ')[1];
+    // } else if (req.cookies.JWT3) {
+    //     token = req.cookies.JWT3;
+    // }
+    // //check if token exists
+    // if (!token) {
+    //     return next(
+    //         new AppError(
+    //             'You are not logged in! Please log in to get access.',
+    //             401
+    //         )
+    //     );
+    // }
+    // //verify token
+    // const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    // //make sure user still exists
+    // const existingUser = await User.findById(decoded.id);
+    // if (!existingUser) {
+    //     const newError = new AppError(
+    //         'User no longer exists for this authorization.'
+    //     );
+    //     newError.isOperational = true;
+    //     return next(newError);
+    // }
+    // //make sure user did not change password since JWT issued
+    // if (existingUser.changedPasswordAfter(decoded.iat)) {
+    //     return next(
+    //         new AppError('Password has been changed. Please log in again')
+    //     );
+    // }
+
+    // //if process get here, then all tests passed and access to next middleware is granted
+    // req.user = existingUser;
+
+    req.user = "5dd54685e23cde20647fdecb"; //NOT YET IMPLEMENTED *** FOR TESTING ***
     next();
 });
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
@@ -156,14 +159,15 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
 });
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {
-        if (!roles.includes(req.user.role)) {
-            return next(
-                new AppError(
-                    'You do not have permission to perform this action.',
-                    403
-                )
-            );
-        }
+        //NOT YET IMPLEMENTED security removed for public view on portfolio
+        // if (!roles.includes(req.user.role)) {
+        //     return next(
+        //         new AppError(
+        //             'You do not have permission to perform this action.',
+        //             403
+        //         )
+        //     );
+        // }
         next();
     };
 };
