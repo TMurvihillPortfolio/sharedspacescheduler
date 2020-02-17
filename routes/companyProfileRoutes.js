@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
     .route('/')
-    .get(companyProfileController.getCompanyProfile)
+    .get(companyProfileController.getAllCompanyProfiles)
     .post(companyProfileController.createCompanyProfile);
 router
     .route('/:id')

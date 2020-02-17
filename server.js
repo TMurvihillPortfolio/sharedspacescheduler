@@ -8,18 +8,18 @@ const app = require('./app');
 //     '<PASSWORD>',
 //     process.env.DATABASE_PASSWORD
 // );
-const DEVDB = process.env.DEV_DATABASE.replace(
-    '<PASSWORD>',
-    process.env.DEV_DATABASE_PASSWORD
-);
-
-// const PORTDB = process.env.PORTFOLIO_DATABASE.replace(
+// const DEVDB = process.env.DEV_DATABASE.replace(
 //     '<PASSWORD>',
-//     process.env.PORTFOLIO_DATABASE_PASSWORD
+//     process.env.DEV_DATABASE_PASSWORD
 // );
 
+const PORTDB = process.env.PORTFOLIO_DATABASE.replace(
+    '<PASSWORD>',
+    process.env.PORTFOLIO_DATABASE_PASSWORD
+);
+
 mongoose
-    .connect(DEVDB, {
+    .connect(PORTDB, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: true,

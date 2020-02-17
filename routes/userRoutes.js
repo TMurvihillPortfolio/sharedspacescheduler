@@ -24,8 +24,8 @@ router.patch('/deleteMe', authController.protect, userController.deleteMe);
 router
     .route('/')
     .get(
-        authController.protect,
-        authController.restrictTo('admin'),
+        // authController.protect, NOT YET IMPLEMENT REMOVED FOR PORTFOLIO
+        // authController.restrictTo('admin'), NOT YET IMPLEMENT REMOVED FOR PORTFOLIO
         userController.getAllUsers
     )
     .post(userController.createUser);
