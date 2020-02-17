@@ -1,0 +1,21 @@
+extends base
+
+block content
+    #data(hidden=true)= bookingItemsJSON
+    include _roomSelectors
+    include _tabs   
+    .grid-container.grid-container-month
+        .grid-item.grid-header
+            p Sunday
+        .grid-item.grid-header
+            p Monday
+        .grid-item.grid-header
+            p Tuesday
+        .grid-item.grid-header
+            p Wednesday
+        .grid-item.grid-header
+            p Thursday
+        .grid-item.grid-header
+            p Friday
+        .grid-item.grid-header
+            p Saturday

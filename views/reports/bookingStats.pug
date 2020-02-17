@@ -1,0 +1,19 @@
+extends ../base
+            
+block content
+    main.main
+        #data= bookingItemsJSON
+        #users= usersJSON
+        h2 Booking Stats
+
+        form.statsForm
+            #js--statsStartDate.statsStartDate
+                label(for='statsStartDate')
+                input(type='date' name='statsStartDate' value='2019-11-01')
+            #js--statsEndDate.statsEndDate
+                label(for='statsEndDate')
+                input(type='date' name='statsEndDate' value='2019-11-10')
+            select#js--statsUserSelect.statsUserSelect
+                option(value='allUsers') All Users
+                option user1
+                option user2

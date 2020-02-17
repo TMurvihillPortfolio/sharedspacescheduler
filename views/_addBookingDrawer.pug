@@ -1,0 +1,51 @@
+.addBookingDrawer#js--addBookingDrawer  
+    .bookingForm
+        h3.heading-secondary Booking Rooms for
+        form.form#js--addBookingForm
+            .bookingFormGroup
+                if user
+                    p.form__label.bookingCustomerName= user.fullName
+                    p#js--userRole(hidden=true)= user.role
+                else               
+                    p#js--bookingCustomer.form__label.bookingCustomerName(style='font-size:18px') User name not found. Please log in again.
+                if user
+                    p#js--bookingCustomerId.form__label.bookingCustomerName(hidden=true)= user._id
+                    p#js--bookingCustomerDiscount.form__label.bookingCustomerName(hidden=true)= user.discountType
+
+            .bookingFormGroup.bookingFormGroup--items
+                .bookingItems
+                    .bookingFirstLine
+                        .bookingItemGroup
+                            .bookingFormGroup--label(style='color: transparent; margin-bottom: 5px;') X
+                            .js--deleteBookingItem.deleteIconContainer
+                                img(src='/img/delete.jpg' alt='Icon to delete booking line item.')  
+                        .bookingItemGroup
+                            .bookingFormGroup--label Room
+                            select.js--bookingRentalRoom(type='text' name='bookingRentalRoom') 
+                                Option(value="Select" disabled selected) Select Room
+                                Option(value='5d95d49acba92705a0266156') Studio/Classroom
+                                Option(value='5d8f68d9a62f2a0b5cc57586') Rm 1 Massage
+                                Option(value='5d8f6916a62f2a0b5cc57588') Rm 2 Counselling
+                                Option(value='5d8f68f2a62f2a0b5cc57587') Rm 3 Chiropractic
+                                Option(value='5d8f68a7a62f2a0b5cc57585') Rm 4 Massage
+                                Option(value='5d8f691ca62f2a0b5cc57589') Rm 5 Counselling
+                        .bookingItemGroup
+                            .bookingFormGroup--label Date
+                            input.js--bookingStartDate(type='date' name='bookingStartDate')   
+                        .bookingItemGroup
+                            .bookingFormGroup--label Start Time
+                            input.js--bookingStartTime(type='time' name='bookingStartTime')                 
+                        .bookingItemGroup
+                            .bookingFormGroup--label End Time
+                            input.js--bookingEndTime(type='time' name='bookingEndTime')  
+                        .bookingItemGroup.recurringContainer
+                            .bookingFormGroup--label Recurring
+                            .recurringIconContainer
+                                img(src='/img/recurringIcon.png' alt='Icon for recurring bookings.')     
+                           
+            .formBtnContainer
+                button.formBtn Book Room(s)
+                button(type='reset').formBtn#js--bookingClearAll Clear All
+    .addBookingDrawerBack(onclick="this.parentElement.classList.remove('addBookingDrawer-active')") 
+        p &#8249;
+        span Close

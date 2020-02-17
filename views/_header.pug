@@ -1,0 +1,21 @@
+header.header
+
+    #js--companyProfile(hidden=true)= companyProfile
+    nav.nav.nav--tours           
+        a.nav__el#js--viewRooms(href='/viewrooms') View Rooms
+        a.nav__el.lastChild#js--bookRooms Book Rooms
+        a#js--calendarButton.nav__el.lastChild(href='/weekcalendar') Calendar
+    .header__logo 
+        a(href='/')
+            img(src='/img/logo.png' alt='Varsity Clinic logo')
+    nav.nav.nav--user
+        if user
+            if user.role === 'admin'
+                a.nav__el(href='/admin') Admin
+            a#js--logoutBtn.nav__el.nav__el--logout.lastChild Log out           
+            a.nav__el(href='/userProfile')
+                //- img.nav__user-img(src=`/img/users/${user.photo}` alt=`${user.name}`)
+                span Hello #{user.fullName}
+        else
+            a.nav__el(href='/login') Log in
+            a.nav__el.nav__el--cta.lastChild(href='/signup') Sign up

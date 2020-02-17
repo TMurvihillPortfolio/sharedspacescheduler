@@ -1,0 +1,30 @@
+extends base
+
+block content
+    #data(hidden=true)= bookingItemsJSON
+    include _roomSelectors
+    include _tabs
+    .grid-container-header.grid-container-headerWeek
+        .grid-item.grid-header
+        .grid-item.grid-header
+            .grid-header-dow Sunday
+            .grid-header-dateNum#js--day0
+        .grid-item.grid-header
+            .grid-header-dow Monday
+            .grid-header-dateNum#js--day1
+        .grid-item.grid-header
+            .grid-header-dow Tuesday
+            .grid-header-dateNum#js--day2
+        .grid-item.grid-header
+            .grid-header-dow Wednesday
+            .grid-header-dateNum#js--day3
+        .grid-item.grid-header
+            .grid-header-dow Thursday
+            .grid-header-dateNum#js--day4
+        .grid-item.grid-header
+            .grid-header-dow Friday
+            .grid-header-dateNum#js--day5
+        .grid-item.grid-header
+            .grid-header-dow Saturday
+            .grid-header-dateNum#js--day6
+    .grid-container.grid-container-week

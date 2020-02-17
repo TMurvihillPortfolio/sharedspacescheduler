@@ -1,0 +1,212 @@
+extends base
+            
+block content
+    main.main
+        #data(hidden=true)= bookingItemsJSON
+        #users(hidden=true)= usersJSON
+
+        .user-view
+            nav.user-view__menu
+                ul.side-nav
+                    -if (user.role === 'admin')
+                        .admin-nav
+                            h5.admin-nav__heading Admin
+                            ul.side-nav
+                                li#js--manageBookings.adminMenuItem.side-nav__selected
+                                    a(href='#') Manage Bookings
+                                li#js--manageUsers.adminMenuItem
+                                    a(href='#') Manage Users
+                                li#js--companyProfileMenu.adminMenuItem
+                                    a(href='#') Company Profile
+                                li#js--manageReports.adminMenuItem
+                                    a(href='#') Reports
+                            
+            #js--manageBookingsContainer.adminForm.admin-item__container
+                .user-view__form-container
+                    h2.heading-secondary.ma-bt-md Manage Bookings
+                    
+                    form#js--editBookingForm
+                        select#js--userSelect(name='userSelect')
+                            option Choose Practitioner
+                        select#js--bookingSelect(name='bookingSelect')
+                            option Choose Booking
+                        .bookingFormGroup.bookingFormGroup--items
+                            .bookingItems
+                                .bookingFirstLine.bookingFirstLine__admin
+                                    .bookingItemGroup
+                                        .bookingFormGroup--label Room
+                                        select#js--bookingEditRentalRoom(type='text' name='bookingRentalRoom' disabled=true) 
+                                            Option(value="" disabled selected) Select Room
+                                            Option(value='5d95d49acba92705a0266156') Studio/Classroom
+                                            Option(value='5d8f68d9a62f2a0b5cc57586') Rm 1 Massage
+                                            Option(value='5d8f6916a62f2a0b5cc57588') Rm 2 Counselling
+                                            Option(value='5d8f68f2a62f2a0b5cc57587') Rm 3 Chiropractic
+                                            Option(value='5d8f68a7a62f2a0b5cc57585') Rm 4 Massage
+                                            Option(value='5d8f691ca62f2a0b5cc57589') Rm 5 Counselling
+                                    .bookingItemGroup
+                                        .bookingFormGroup--label Date
+                                        input#js--bookingEditStartDate(type='date' name='bookingStartDate' disabled=true)   
+                                    .bookingItemGroup
+                                        .bookingFormGroup--label Start Time
+                                        input#js--bookingEditStartTime(type='time' name='bookingStartTime' disabled=true)                 
+                                    .bookingItemGroup
+                                        .bookingFormGroup--label End Time
+                                        input#js--bookingEditEndTime(type='time' name='bookingEndTime' disabled=true) 
+                                    .bookingItemGroup
+                                        .bookingFormGroup--label Discount
+                                        input#js--bookingDiscountType.bookingDiscountType(name='bookingDiscountType' disabled=true)   
+                                    .bookingItemGroup(hidden=true)
+                                        .bookingFormGroup--label Subtotal
+                                        input#js--bookingSubtotal(name='bookingSubtotal' disabled=true)   
+                                    .bookingItemGroup(hidden=true)
+                                        .bookingFormGroup--label DB ID#
+                                        input#js--bookingEditIdNum(name='bookingEditIdNum' disabled=true)  
+                                    
+                        .adminBtnGroup.form__group.right
+                            button#js--saveEditBooking.adminBtn.formBtn(name='edit') Save changes
+                            button#js--cancelEditBooking.adminBtn.adminBtn--cancel.formBtn(type='reset') Cancel
+                            button#js--deleteEditBooking.adminBtn.adminBtn--delete.formBtn(type='text') Delete Booking
+                .line &nbsp;
+                
+            #js--manageUsersContainer.user-view__content.admin-item__container
+                .user-view__form-container
+                    h2.heading-secondary.ma-bt-md Manage Users
+
+                    h3 Add User                 
+                    div(style="width: 100%")
+                        p To add a new user, log out and add the user using the signup menu choice that will appear on the top right. Then log back in as an administrator and update the user role, discount, etc.
+                    .line &nbsp;
+                    
+                    //- form#js--adminAddUserForm.adminAddUserForm.form.form-user-data
+                    h3 Manage which user?
+                    select#js--manageUserSelect(name='manageUserSelect')
+                            option Choose User
+                    .line &nbsp;
+                    h3 Send / Resend Welcome email
+                    #js--welcomeEmailBtn.btn.formBtn.adminWelcomeBtn(disabled=true) Send Email
+                    .line &nbsp;
+                    h3 Update User
+                    p Name, email, and password updates are performed by the user
+                                        
+                    form#js--adminUpdateUserForm.adminUpdateUserForm                           
+                        
+                        label(for='role') User Role
+                        select#js--adminUserRoleSelect(disabled=true)
+                            option Choose Role
+                            option(value='practitioner') Practitioner
+                            option(value='admin') Admin
+                            option(value='other') Other
+                        label(for='discount') Discount Type
+                        select#js--adminUserDiscountType(disabled=true)
+                            option Choose Discount
+                            option(value='none') None
+                            option(value='standard') Standard
+                            option(value='admin') Admin
+                            option(value='other') Other
+                        .line
+                        label(for='hasKey') Has Key?
+                        input#js--adminUserHasKey(type='checkbox' name='hasKey' disabled=true)
+                        label(for='isApproved') Is Approved?
+                        input#js--adminUserIsApproved(type='checkbox' name='isApproved' disabled=true)
+                        .line
+
+                        button.formBtn.loginBtn Update
+                    .line &nbsp;
+                    h3 Delete User
+                    button#js--deleteUserBtn.btn.formBtn.adminBtn--delete(disabled=true) Delete
+                                                 
+            #js--companyProfileContainer.user-view__content.admin-item__container
+                .user-view__form-container
+                    h1.heading-secondary.ma-bt-md Company Profile
+                    
+                    form#js--updateCompanyProfileForm.adminProfileForm
+                        h2 Advance Bookings
+                        .profileDaysInAdvance
+                            label(for='daysInAdvance') Number of days in advance bookings are permitted: 
+                            input#js--daysInAdvance(name='daysInAdvance')
+                        hr
+                        .roomPrices
+                            h2 Room Prices
+                            h4 Studio
+                            label(for='studioPrice') Without Discount:
+                            input#js--studioPrice(name='studioPrice')
+                            label(for='studioDiscountPrice') With Discount:
+                            input#js--studioDiscountPrice(name='studioDiscountPrice')
+                            h4 Treatment Room
+                            label(for='treatmentRoomPrice') Without Discount:
+                            input#js--treatmentRoomPrice(name='treatmentRoomPrice')
+                            label(for='treatmentRoomDiscountPrice') With Discount:
+                            input#js--treatmentRoomDiscountPrice(name='treatmentRoomDiscountPrice')
+                        hr
+                        .companyHours
+                            h2 Hours of Operation
+                            p Monday
+                            label(for='mondayOpen') Open:
+                            input#js--mondayOpen(type='time' name='mondayOpen')
+                            label(for='mondayClose') Close:
+                            input#js--mondayClose(type='time' name='mondayClose')
+                            p Tuesday
+                            label(for='tuesdayOpen') Open:
+                            input#js--tuesdayOpen(type='time' name='tuesdayOpen')
+                            label(for='tuesdayClose') Close:
+                            input#js--tuesdayClose(type='time' name='tuesdayClose')
+                            p Wednesday
+                            label(for='wednesdayOpen') Open:
+                            input#js--wednesdayOpen(type='time' name='wednesdayOpen')
+                            label(for='wednesdayClose') Close:
+                            input#js--wednesdayClose(type='time' name='wednesdayClose')
+                            p Thursday
+                            label(for='thursdayOpen') Open:
+                            input#js--thursdayOpen(type='time' name='thursdayOpen')
+                            label(for='thursdayClose') Close:
+                            input#js--thursdayClose(type='time' name='thursdayClose')
+                            p Friday
+                            label(for='fridayOpen') Open:
+                            input#js--fridayOpen(type='time' name='fridayOpen')
+                            label(for='fridayClose') Close:
+                            input#js--fridayClose(type='time' name='fridayClose')
+                            p Saturday
+                            label(for='saturdayOpen') Open:
+                            input#js--saturdayOpen(type='time' name='saturdayOpen')
+                            label(for='saturdayClose') Close:
+                            input#js--saturdayClose(type='time' name='saturdayClose')
+                            p Sunday
+                            label(for='sundayOpen') Open:
+                            input#js--sundayOpen(type='time' name='sundayOpen')
+                            label(for='sundayClose') Close:
+                            input#js--sundayClose(type='time' name='sundayClose')
+                        hr
+                        h4 Special Hours (Holiday Hours) -- under construction
+                        label(for='dateSpecialHours') Date:
+                        input.js--dateSpecialHours(type='date' name='dateSpecialHours')
+                        label(for='specialHoursOpen') Open:
+                        input.js--specialHoursOpen(type='time' name='specialHoursOpen')
+                        label(for='specialHoursClose') Close:
+                        input#js--specialHoursClose(type='time' name='specialHoursClose')
+                        hr
+                        button#js--updateProfile.adminBtn.formBtn(name='updateProfile') Update Profile
+                    
+            .line &nbsp;    
+            #js--reports.user-view__content.admin-item__container
+                .user-view__form-container
+                div
+                    h2.heading-secondary.ma-bt-md Reports
+                       
+                    #data(hidden=true)= bookingItemsJSON
+                    #users(hidden=true)= usersJSON
+                    h3 Booking Stats
+
+                    form#js--statsForm.adminStatsForm  
+                        .stats.flexSE
+                            .statsStartDate
+                                label(for='statsStartDate') Start Date: 
+                                input(type='date' id='js--statsStartDate' name='statsStartDate')
+                            .statsEndDate
+                                label(for='statsEndDate') End Date (inclusive): 
+                                input(type='date' id='js--statsEndDate' name='statsEndDate')
+                            select#js--statsUserSelect.statsUserSelect
+                                option(value='allUsers') All Users
+                        button#js--runStats.adminBtn.formBtn(name='run') Create Report
+                    .line
+                    #js--statsReport.statsReport
+                            

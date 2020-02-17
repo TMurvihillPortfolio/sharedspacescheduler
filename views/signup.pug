@@ -1,0 +1,26 @@
+extends base
+
+block content
+    .signupContainer
+        form#js--signupForm.signupForm
+            h1 CREATE YOUR ACCOUNT
+            //- .loginFormGroup
+            //-     label(for='salutation') Salutation
+            //-     input#js--salutation(type='text' name='salutation' value='Ms.' required='true' placeholder='Ms.Mr.Dr., etc.')
+            .loginFormGroup
+                label(for='firstName') First Name
+                input#js--firstName(type='text' name='firstName' required='true' placeholder='first name')
+            .loginFormGroup
+                label(for='lastName') Last Name
+                input#js--lastName(type='text' name='lastName' required='true' placeholder='last name')
+            .loginFormGroup
+                label(for='email') Email address
+                input#js--email(type='email' name='email' required='true' placeholder='you@example.com')
+            .loginFormGroup
+                label(for='password') Password
+                input#js--password(type='password' name='password' required='true' placeholder='••••••••')
+            .loginFormGroup
+                label(for='password') Password Confirm
+                input#js--passwordConfirm(type='password' name='passwordConfirm' required='true' placeholder='••••••••')
+            .loginFormGroup.formBtnContainer
+                button.formBtn.loginBtn Signup

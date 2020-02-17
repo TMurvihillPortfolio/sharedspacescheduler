@@ -133,28 +133,29 @@ exports.protect = catchAsync(async (req, res, next) => {
     next();
 });
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
-    //initialize variables
-    const token = req.cookies.JWT3;
-    //get token from header
-    if (req.cookies.JWT3) {
-        //verify token
-        const decoded = await promisify(jwt.verify)(
-            token,
-            process.env.JWT_SECRET
-        );
-        //make sure user still exists
-        const existingUser = await User.findById(decoded.id);
-        if (!existingUser) {
-            return next();
-        }
-        //make sure user did not change password since JWT issued
-        if (existingUser.changedPasswordAfter(decoded.iat)) {
-            return next();
-        }
-        //if process get here, then all tests passed and access to next middleware is granted
-        res.locals.user = existingUser;
-        return next();
-    }
+    //NOT YET IMPLEMENTED *** security removed for testing ***
+    // //initialize variables
+    // const token = req.cookies.JWT3;
+    // //get token from header
+    // if (req.cookies.JWT3) {
+    //     //verify token
+    //     const decoded = await promisify(jwt.verify)(
+    //         token,
+    //         process.env.JWT_SECRET
+    //     );
+    //     //make sure user still exists
+    //     const existingUser = await User.findById(decoded.id);
+    //     if (!existingUser) {
+    //         return next();
+    //     }
+    //     //make sure user did not change password since JWT issued
+    //     if (existingUser.changedPasswordAfter(decoded.iat)) {
+    //         return next();
+    //     }
+    //     //if process get here, then all tests passed and access to next middleware is granted
+    //     res.locals.user = existingUser;
+    //     return next();
+    // }
     next();
 });
 exports.restrictTo = (...roles) => {

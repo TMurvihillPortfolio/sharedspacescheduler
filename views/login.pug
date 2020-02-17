@@ -1,0 +1,17 @@
+extends base
+
+block content
+    .loginContainer
+        form#js--loginForm.loginForm
+            h1 LOG INTO YOUR ACCOUNT
+            .loginFormGroup
+                label(for='email') Email address
+                input#js--email(type='email' name='email' required='true' placeholder='you@example.com')
+            .loginFormGroup
+                .flexSB
+                    label(for='password') Password
+                    a#js--forgotPasswordLink.underline.cursorPointer forgot password
+                input#js--password(type='password' name='password' required='true' placeholder='••••••••')
+            .loginFormGroup.formBtnContainer
+                button.formBtn.loginBtn Login
+                    

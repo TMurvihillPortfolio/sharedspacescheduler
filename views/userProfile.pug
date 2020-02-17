@@ -1,0 +1,56 @@
+extends base
+
+mixin navItem(link, text, icon, active)
+    li(class=`${active ? 'side-nav--active' : ''}`)
+        a(href=`${link}`)
+            svg
+                use(xlink:href=`img/icons.svg#icon-${icon}`)
+            | #{text}
+
+block content
+
+    main.main
+        .user-view
+            nav.user-view__menu
+                ul.side-nav
+                    +navItem('#', 'Profile', 'profile', true)
+                    +navItem('/myBookings', 'My Bookings', 'briefcase')     
+                            
+            .user-view__content
+                .user-view__form-container
+                    h2.heading-secondary.ma-bt-md Your account profile
+                    //- without API
+                    //- form.form.form-user-data(action='/submit-user-data' method='POST' enctype='multipart/form-data')
+
+                    //- with API
+                    form.form.form-user-data
+                        .loginFormGroup(hidden=true)
+                            input#js--profileUserId(type='text' name='firstName' value=`${user._id}`)
+                        .loginFormGroup
+                            label(for='firstName') First Name
+                            input#js--profileFirstName(type='text' name='firstName' value=`${user.firstName}` required='true' placeholder='first name')
+                        .loginFormGroup
+                            label(for='lastName') Last Name
+                            input#js--profileLastName(type='text' name='lastName' value=`${user.lastName}` required='true' placeholder='last name')
+                        .loginFormGroup.ma-bt-md
+                            label.form__label(for='email') Email address
+                            input#js--profileEmail.form__input(type='email', value=`${user.email}`, required, name='email')
+                        .loginFormGroup.right
+                            button#js--updateProfileBtn.btn.formBtn.btn--small.btn--green Save changes
+                            button#js--updateProfileBtn.btn.formBtn.btn--small.btn--green(type='reset') Cancel
+                .line &nbsp;
+                .user-view__form-container
+                    h2.heading-secondary.ma-bt-md Password change
+                    form.form.form-user-password
+                        .loginFormGroup
+                            label.form__label(for='password-current') Current password
+                            input#js--currentPassword.form__input(type='password', placeholder='••••••••', required, minlength='8')
+                        .loginFormGroup
+                            label.form__label(for='password') New password
+                            input#js--password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+                        .loginFormGroup.ma-bt-lg
+                            label.form__label(for='password-confirm') Confirm password
+                            input#js--passwordConfirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
+                        .loginFormGroup.right
+                            button#js--updatePasswordBtn.btn.formBtn.btn--small.btn--green Save password
+                            button#js--updatePasswordBtn.btn.formBtn.btn--small.btn--green(type='reset') Cancel

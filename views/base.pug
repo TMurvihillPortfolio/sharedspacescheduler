@@ -1,0 +1,33 @@
+
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    link(href='https://fonts.googleapis.com/css?family=Lato:100,300,400&display=swap' rel='stylesheet')
+    link(rel="shortcut icon" type="image/png" href="img/logo.png")
+    title Varsity Clinic
+    link(rel='stylesheet' href='css/styles.css')
+
+body
+    //NAV HEADER
+    include _header
+    
+    //ALERT MESSAGE
+    include _alertMessage
+    
+    //BOOKING DRAWER
+    include _addBookingDrawer
+    .mainHeading
+        h1 Varsity Clinic Scheduler
+        #todayDate
+
+    //CONTENT
+    block content
+        h1 placeholder
+               
+    //FOOTER
+    include _footer
+
+    //- script(src='/js/script.js?v=.005')
+    script(type="module" src="/js/modules/script.mjs")
