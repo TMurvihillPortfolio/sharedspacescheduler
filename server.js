@@ -29,9 +29,8 @@ mongoose
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
-    console.log(`VCScheduler running on port: ${port}...`);
+    console.log(`scheduler-api running on port: ${port}...`);
 });
-
 // //fallback exception handler (will not handle exceptions above this line of code)
 // process.on('uncaughtException', err => {
 //     console.log('Uncaught Exception.');

@@ -2,17 +2,6 @@ installed create react app and that is it.
 
 -- start transferring backend and make sure it works.
 
-add back to config.env
-EMAIL_USERNAME=ae3b425ea2a0de
-EMAIL_PASSWORD=1bd072a57f0c1f
-EMAIL_HOST=smtp.mailtrap.io
-EMAIL_PORT=2525
-
-MAILJET_USERNAME=6a18c42cc1461f2312f050001f004f32
-MAILJET_PASSWORD=ab9e9f64ee8f626f5a0c09af42f2b35c
-MAILJET_HOST=in-v3.mailjet.com
-MAILJET_PORT=2525
-
 
 ## STEPS TO DEPLOY and REVERT TO DEV
 
